@@ -26,9 +26,7 @@
   <hr />
   <!-- Built-in ngStyle attribute directive: uses Property Binding [ ] to bind to a property of the directive -->
   <h3 [ngStyle]="{color: getColor()}">Users</h3>
-  <div *ngIf="newUserAdded; else noUsers">
-    
-     
+      
  
     <!-- Built-in *ngFor directive -->
    
@@ -48,7 +46,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+ 
   <!-- Create ng-template with local reference (#) to conditinally display -->
   <ng-template #noUsers>No Users Added.</ng-template>
 </div>

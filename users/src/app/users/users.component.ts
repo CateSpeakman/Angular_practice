@@ -62,6 +62,11 @@ export class UsersComponent implements OnInit {
         this.userName = params['username'];
       });
 
+      this.authService.getUsers().subscribe((data)  => {
+        this.users = data.users;
+      });
+
+
   }
   onLogout() {
     this.router.navigate(['/']);

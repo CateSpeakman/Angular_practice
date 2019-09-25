@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from './users.model';
 
@@ -12,20 +13,23 @@ import { AuthService } from './../providers/auth.service';
 export class UsersComponent implements OnInit {
   title = 'Add User';
 
-  addNewUser: boolean = false;
-
   firstName: string = '';
   lastName: string = '';
   email: string = '';
 
   newUserAdded: boolean = false;
+  addNewUser: boolean = false;
+
+  sub: any;
+  userName: string = '';
 
 
+  // Array to hold User Objects
+  users: User[] = [];
 
-// Array to hold User Objects
-users: User[] = [];
-
-constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
 
   // executed when the Reset button is clicked
@@ -47,8 +51,19 @@ constructor(private authService: AuthService) { }
     return this.newUserAdded === true ? '#000080' : '#FF0000'; // navy : red
   }
 
-  
-  ngOnInit() {
-  }
 
+  ngOnInit() {
+    // get username from Query Params
+    // Subscribe to Observable
+    // pass anonymoue callback function to subscribe method
+    this.sub = this.route
+      .queryParams
+      .subscribe(params => {
+        this.userName = params['username'];
+      });
+
+  }
+  onLogout() {
+    this.router.navigate(['/']);
+  }
 }
